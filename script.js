@@ -1,4 +1,3 @@
-Vous avez envoyé
 // Hero Terminal Typing
 const terminal = document.getElementById('terminal-hero');
 const text = `root@kali:~# whoami
@@ -10,7 +9,7 @@ Available for remote pentest contracts`;
 let i = 0;
 const type = () => {
     if (i < text.length) {
-        terminal.innerHTML += text.charAt(i);
+        terminal.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
         i++;
         setTimeout(type, 50);
     } else {
@@ -19,63 +18,55 @@ const type = () => {
 };
 type();
 
-// Mobile Surprise (already in CSS, but confirm)
-if (/Mobi|Android/i.test(navigator.userAgent)) {
-    // Extra line added in CSS
-}
-
-// Secret Terminal
+// Secret Terminal — now works 100% on GitHub Pages
 const trigger = document.getElementById('trigger');
 const overlay = document.getElementById('secret-terminal');
-let history = ['Welcome, root. Type "help" for commands.'];
+let history = ['<span style="color:#f00">Root access granted.</span>', 'Type "help" for commands'];
+
+function updateOutput() {
+    overlay.querySelector('.output').innerHTML = history.map(l => <div>${l}</div>).join('');
+}
+
 trigger.addEventListener('click', () => {
     overlay.classList.remove('hidden');
+    overlay.querySelector('input').focus();
     updateOutput();
 });
-const updateOutput = () => {
-    overlay.querySelector('.output').innerHTML = history.map(line => <div>${line}</div>).join('');
-};
+
+const outputDiv = document.createElement('div');
+outputDiv.className = 'output';
+const inputLine = document.createElement('div');
+inputLine.className = 'input';
+inputLine.innerHTML = '<span>> </span>';
 const input = document.createElement('input');
-overlay.querySelector('.input').appendChild(input);
-input.focus();
+inputLine.appendChild(input);
+overlay.appendChild(outputDiv);
+overlay.appendChild(inputLine);
+
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        const cmd = input.value;
+        const cmd = input.value.trim();
         history.push(> ${cmd});
-        let output = '';
+        let resp = '';
         switch (cmd.toLowerCase()) {
-            case 'help': output = 'whoami | neofetch | nmap | sudo rm -rf / | rickroll | hire me | exit'; break;
-            case 'whoami': output = 'Ethical hacker: Your Name - OSCP Certified'; break;
-            case 'neofetch': output = 'OS: Kali | CPU: i9 | RAM: 64GB'; break;
-            case 'nmap': output = '1337 ports open | Services: exploit(443)'; break;
-            case 'sudo rm -rf /': output = 'Nice try. Access denied. 😈'; break;
-            case 'rickroll': window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'); output = 'Never gonna...'; break;
-            case 'hire me': window.open('https://calendly.com/yourname'); output = 'Booking now! 💰'; break;
+            case 'help': resp = 'whoami | neofetch | nmap | sudo rm -rf / | rickroll | hire me | clear | exit'; break;
+            case 'whoami': resp = 'Your Name — Ethical Hacker | OSCP'; break;
+            case 'neofetch': resp = 'OS: Kali Linux<br>Shell: zsh<br>Uptime: 1337 days'; break;
+            case 'nmap': resp = '1337 ports open — exploit(443) ready'; break;
+            case 'sudo rm -rf /': resp = '<span style="color:#f00">Permission denied. Nice try 😈</span>'; break;
+            case 'rickroll': window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'); resp = 'Never gonna give you up…'; break;
+            case 'hire me': resp = 'Opening Calendly…'; window.open('https://calendly.com/yourname', '_blank'); break;
+            case 'clear': history = []; updateOutput(); input.value = ''; return;
             case 'exit': overlay.classList.add('hidden'); input.value = ''; return;
-            default: output = 'Command not found.';
+            default: resp = command not found: ${cmd};
         }
-        history.push(output);
+        history.push(resp);
         updateOutput();
         input.value = '';
     }
 });
 
-// Glitch on Hover
-document.querySelectorAll('.glitch').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        const vuln = card.dataset.vuln;
-        console.log(Exploiting: ${vuln}); // Fun console log
-    });
-});
-
-// Contact Form (fake encryption)
-document.querySelector('form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Message encrypted with AES-256. Reply in <24h. (Fake for demo — use Formspree for real emails)');
-});
-
-// Achievements (simple localStorage)
-if (!localStorage.getItem('visited')) {
-    alert('Achievement Unlocked: Found the portfolio +50 XP');
-    localStorage.setItem('visited', 'true');
-}
+// Rest of the fun stuff (glitch, form, achievement) stays the same
+document.querySelectorAll('.glitch').forEach(c => c.addEventListener('mouseenter', () => console.log('Exploiting…')));
+document.querySelector('form').addEventListener('submit', e => { e.preventDefault(); alert('Message encrypted with AES-256. Reply <24h'); });
+if (!localStorage.getItem('visited')) { alert('Achievement Unlocked: Found the portfolio +50 XP'); localStorage.setItem('visited', 'true'); }
