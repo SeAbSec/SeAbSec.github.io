@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Offensive Security Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💀</text></svg>">
+</head>
+<body>
+    <div id="terminal-hero" class="terminal"></div>
+    
+    <nav class="nav">
+        <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="projects" class="projects">
+        <h2>Critical Findings</h2>
+        <div class="project-card glitch" data-vuln="RCE via GraphQL Injection">
+            <h3>Bank RCE → CVE-2025-XXXX</h3>
+            <p>$75k bounty | Tools: Burp, Nuclei</p>
+        </div>
+        <div class="project-card glitch" data-vuln="Domain Admin Takeover">
+            <h3>AD Compromise in 4 Hours</h3>
+            <p>Kerberoasting + BloodHound</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>/now</h2>
+        <p>Writing Nuclei templates | Reading "The Ghidra Book" | OSCP Certified</p>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Send Encrypted Message</h2>
+        <form>
+            <input type="text" placeholder="hacker_alias" required>
+            <textarea placeholder="your_offer += 1000000" required></textarea>
+            <button type="submit">Encrypt & Send</button>
+        </form>
+    </section>
+
+    <footer class="ticker">
+        <div class="marquee">
+            Currently pwning: OAuth misconfigs | Coffees: 4 | Threat: Ghosting recruiters
+        </div>
+    </footer>
+
+    <div id="secret-terminal" class="terminal-overlay hidden"></div>
+    <div id="trigger" class="blink">_</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

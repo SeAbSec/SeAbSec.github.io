@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="%23ff0044"/></svg>'), auto;
+    overflow-x: hidden;
+}
+
+a, button { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 0L0 10h20z" fill="%23ff0044"/></svg>'), pointer; }
+
+.terminal {
+    background: #000;
+    border: 1px solid #f00;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 1.4;
+    box-shadow: 0 0 10px #f00;
+}
+
+.nav { position: fixed; top: 0; width: 100%; background: #000; border-bottom: 1px solid #f00; z-index: 10; }
+.nav ul { list-style: none; display: flex; justify-content: center; margin: 0; padding: 10px; }
+.nav li { margin: 0 15px; }
+.nav a { color: #f00; text-decoration: none; }
+
+.projects, .about, .contact { padding: 60px 20px; text-align: center; }
+.project-card { 
+    background: #111; 
+    border: 1px solid #f00; 
+    padding: 20px; 
+    margin: 20px auto; 
+    max-width: 400px; 
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.glitch:hover { animation: glitch 0.3s linear; }
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); }
+    40% { transform: translate(2px, -2px); clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%); }
+}
+
+.contact form { max-width: 400px; margin: 0 auto; text-align: left; }
+.contact input, .contact textarea { width: 100%; padding: 10px; margin: 10px 0; background: #111; border: 1px solid #f00; color: #0f0; }
+.contact button { background: #f00; color: #000; border: none; padding: 10px 20px; cursor: pointer; }
+
+.ticker { position: fixed; bottom: 0; width: 100%; background: #000; border-top: 1px solid #f00; }
+.marquee { white-space: nowrap; animation: scroll 20s linear infinite; }
+@keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+.blink { position: fixed; bottom: 20px; right: 20px; font-size: 24px; color: #f00; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.terminal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; 
+    z-index: 100; display: flex; flex-direction: column;
+}
+.terminal-overlay .output { flex: 1; padding: 20px; overflow-y: auto; }
+.terminal-overlay .input { padding: 20px; border-top: 1px solid #f00; display: flex; }
+.terminal-overlay input { flex: 1; background: none; border: none; color: #0f0; outline: none; }
+
+.hidden { display: none; }
+
+@media (max-width: 768px) {
+    .terminal::after { content: "\nMobile detected… NetHunter boot ╍╍╍"; color: #f00; }
+}
